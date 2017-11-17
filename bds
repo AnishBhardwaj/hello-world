@@ -1,0 +1,323 @@
+bash
+#!/bin/bash
+cat abc.txt | grep -o 'b\|c\|d\|f\|g\|h\|j\|k\|l\|m\|n\|p\|q\|r\|s\|t\|v\|w\|x\|y\|z\|B\|C\|D\|F\|G\|H\|J\|K\|L\|M\|N\|P\|Q\|R\|S\|T\|V\|W\|X\|Y\|Z' > b.txt
+for a in `cat b.txt`
+do
+	s=$(($s + 1))
+done
+echo $s
+
+#!/bin/bash
+for a in `cat exam2.txt`
+do
+	s=$(($s + $a))
+done
+wc -w < exam2.txt > a.txt
+for b in `cat a.txt`
+do 
+	n=$b
+done
+echo $((s/n))
+
+#!/bin/bash
+read n
+for((a=0;a<$n;a++))
+do
+	for((b=0;b<n-a;b++))
+	do
+		echo -n ' '
+	done	
+	for((c=0;c<=a;c++))
+	do
+		echo -n '1 '
+	done
+	echo ' '
+done
+
+#!/bin/bash
+
+for((i=1;i<=10;i++));
+do
+	mkdir dir$i
+	cd dir$i
+done
+
+Dash
+#!/bin/bash
+echo -n "Enter number: "
+read n
+if [ $n -gt 20 ]
+then
+	echo "Please enter a number between 0 and 20"
+	exit
+fi
+if [ $n -lt 0 ]
+then
+	echo "Please enter a number between 0 and 20"
+	exit
+fi
+if [ $n -eq 0 ]
+then
+	echo "Factorial is 0"
+	exit
+fi
+x=1
+g=1
+while [ $n -gt $g ]  
+do
+	x=`expr $x \* $n`
+	n=`expr $n - 1`
+done
+echo "Factorial is $x"
+
+#!/bin/sh
+echo -n "Enter number: "
+read n
+if [ $n -lt 0 ]
+then
+	echo "Please enter a postive number"
+	exit
+fi
+temp=0
+while [ $n -gt 0 ]
+do
+    r=`expr $n % 10`
+    if [ $r -gt $temp ]
+	then
+    	temp=`expr $r`
+    fi
+    n=`expr $n / 10`
+done
+echo  "Largest Digit is $temp"
+
+#!/bin/sh
+num(){
+	j=`expr $1`
+	if [ `expr $j % 3` -eq 0 ]
+		then
+		if [ `expr $j % 5` -ne 0 ]
+		then
+		echo "$j"
+		fi
+	fi
+}
+echo -n 'Enter starting point: '
+read s
+if [ $s -lt 0 ]
+then
+	echo "Please enter a postive number"
+	exit
+fi
+echo -n 'Enter ending point: '
+read e
+if [ $e -lt $s ]
+then
+	echo "Please enter a number greater than the start"
+	exit
+fi
+echo "List of numbers that are divisible by 3 but not 5 are: "
+for i in `seq $s $e`
+do
+	num ${i}
+done
+
+#!/bin/sh
+#This works irrespective of case
+#To work with respect to case, hash out the fourth and sixth line and unhash the fifth
+echo "Enter a String: "
+read p
+#read pos
+pos=$(echo ${p} | tr "[:upper:]" "[:lower:]")
+opp=$(echo $pos | rev)
+#echo "possible palindrome: $pos      opposite: $opp"
+if [ "$pos" = "$opp" ]
+then
+	echo "Palindrome"
+	exit
+else
+	echo "Not a Palindrome"
+	exit
+fi
+
+AWK
+BEGIN {
+	print "Circumference and Area Code"
+	print "Press Ctrl-D to exit at any time"
+	print "Return to Start" 	
+}
+{
+	printf "Enter radius: "
+	getline r
+	a=3.14*r*r
+	b=2*3.14*r
+	print "Area = "a
+	print "Circumference = "b
+	print "Press Ctrl-D to exit, Return to try again"
+}
+END {
+	print ""
+	print "------End of Code------"
+}
+
+BEGIN {
+	print "Even Odd Code"
+	print "Press Ctrl-D to exit at any time"
+	print "Return to Start" 
+}
+{
+	flg=0
+	printf "Start: "
+	getline a
+	printf "End: "
+	getline b
+	even=0
+	odd=0
+	for (i=a; i<=b; ++i)
+		if((i%2)==0)
+		{
+			flg=1
+			even=even+i
+		}
+		else
+		{
+			flg=1
+			odd=odd+i
+		}
+	if(flg==1)
+	{
+		print "Sum of Even: " even
+		print "Sum of Odd: " odd
+		print "Ctrl-D to exit, Return to try again"
+	}
+	else if(flg==0)
+	{
+		print "Please make sure the second number is greater than the first and that all numbers are positive"
+		print "Ctrl-D to exit, Return to try again"
+	}
+	
+}
+END {
+	print ""
+	print "------End of Code------"
+}
+
+#usage: awk -f q2.awk nums.txt
+BEGIN {
+	print "Even Odd Code"
+	#print "Press Ctrl-D to exit at any time"
+	#print "Return to Start" 
+	print""
+}
+{
+	a=$1
+	b=$2
+	#flg=0
+	#printf "Start: "
+	#getline a
+	#printf "End: "
+	#getline b
+	if(a>b)
+	{
+		tmp = a
+		a = b
+		b = tmp
+	}
+	even=0
+	odd=0
+	for (i=a; i<=b; ++i)
+		if((i%2)==0)
+		{
+			#flg=1
+			even=even+i
+		}
+		else
+		{
+			#flg=1
+			odd=odd+i
+		}
+	print "Sum of Even: " even
+	print "Sum of Odd: " odd
+	print "Ctrl-D to exit, Return to try again"
+}
+END {
+	print ""
+	print "------End of Code------"
+}
+
+#usage: awk -f q2.awk a.txt
+BEGIN{
+	print "Word Frequency Code"
+	print ""
+	j = 0
+}
+{
+	for(i=1;i<=NF;i++)
+	{
+		if(arr[$i]++==0)
+		{
+     			count[++a]=$i;
+		}
+	}
+
+}
+END{
+	for(i=0;i<=a;i++)
+	{
+		for(j=i+1;j<=a;j++)
+		{
+			if(arr[count[i]]<arr[count[j]])
+			{
+				temp=count[i];
+				count[i]=count[j];
+				count[j]=temp;
+			}
+		}
+	}
+	for (i=0;i<a;i++)
+	{
+		printf count[i]
+		printf " :"
+		printf arr[count[i]]
+		print ""
+	}
+	print ""
+	print "------End of Code------"
+}
+
+BEGIN{
+	print "Palindrome Code ()"
+	print "Press Ctrl-D to exit at any point"
+	print "Return to Begin"
+}
+{
+	printf "Enter a String: "
+	getline str;
+	str=toupper(str)
+	n=split(str,hel,"");
+	flg=0
+	for(i in hel) 
+	{ 
+		rev=length(str)-i+1
+		if(rev<1)
+		{
+			flg=2
+		}
+		if(hel[i] != hel[rev])
+		{
+			flg=1
+			break
+		}
+	}
+	if(flg==0)  
+	print "String is a Palindrome " ; 
+	else
+	if(flg==2)
+	print "Please enter a string" 
+	else  
+	print "String is not a Palindrome" ;
+	print "Ctrl-D to exit and Return to try again"
+}
+END{
+	print ""	
+	print "------End of Code------"
+}
